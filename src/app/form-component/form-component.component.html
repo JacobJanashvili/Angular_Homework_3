@@ -1,0 +1,113 @@
+<div class="wrapper">
+  <div class="header-color"></div>
+  <form [formGroup]="reactiveForm" class="form">
+    <div class="introduction">
+      <h1 class="title">Product Review</h1>
+      <div class="form_items">
+        <div class="first-name form_div">
+          <label for="first-name">First Name</label>
+          <input type="text" name="first-name" formControlName="firstName" />
+          <p
+            class="error_text"
+            *ngIf="reactiveForm.get('firstName')?.errors?.['required']"
+          >
+            * first name should not be empty
+          </p>
+          <p
+            class="error_text"
+            *ngIf="reactiveForm.get('firstName')?.errors?.['minlength']"
+          >
+            * first name should be at least
+            {{reactiveForm.get('firstName')?.errors?.['minlength'].requiredLength}}
+            letters
+          </p>
+        </div>
+        <div class="last-name form_div">
+          <label for="last-name">Last Name</label>
+          <input type="text" name="last-name" formControlName="lastName" />
+          <p
+            class="error_text"
+            *ngIf="reactiveForm.get('lastName')?.errors?.['required']"
+          >
+            * last name should not be empty
+          </p>
+          <p
+            class="error_text"
+            *ngIf="reactiveForm.get('lastName')?.errors?.['minlength']"
+          >
+            * last name should be at least
+            {{reactiveForm.get('lastName')?.errors?.['minlength'].requiredLength}}
+            letters
+          </p>
+        </div>
+        <div class="email form_div">
+          <label for="email">Email</label>
+          <input type="text" name="email" formControlName="Email" />
+          <p
+            class="error_text"
+            *ngIf="reactiveForm.get('Email')?.errors?.['email']"
+          >
+            * email should be in proper format
+          </p>
+          <p
+            class="error_text"
+            *ngIf="reactiveForm.get('Email')?.errors?.['required']"
+          >
+            * email should not be empty
+          </p>
+        </div>
+        <div class="select form_div">
+          <select name="products" id="products" formControlName="Select">
+            <option value="neutral">Neutral</option>
+            <option value="dissatisfied">Dissatisfied</option>
+            <option value="happy">Happy</option>
+          </select>
+        </div>
+        <div class="date form_div">
+          <input type="date" formControlName="Date" [readOnly]="true" />
+        </div>
+        <div class="rating form_div">
+          <p>Please rate my program</p>
+          <div>
+            <label for="1">1</label>
+            <input type="radio" name="Rating" id="1" value="1" formControlName="Rating"/>
+            <label for="2">2</label>
+            <input type="radio" name="Rating" id="2" value="2" formControlName="Rating"/>
+            <label for="3">3</label>
+            <input type="radio" name="Rating" id="3" value="3" formControlName="Rating"/>
+            <label for="4">4</label>
+            <input type="radio" name="Rating" id="4" value="4" formControlName="Rating"/>
+            <label for="5">5</label>
+            <input type="radio" name="Rating" id="5" value="5" formControlName="Rating"/>
+          </div>
+          <p class="error_text" *ngIf="reactiveForm.get('Rating')?.errors?.['required']">* You must choose one of these options</p>
+        </div>
+        <div class="textarea form_div">
+          <textarea
+            name="Review"
+            id="Review"
+            cols="30"
+            rows="10"
+            maxlength="500"
+            placeholder="Maximum 500 characters"
+            formControlName="Review"
+          ></textarea>
+          <p
+            class="error_text"
+            *ngIf="reactiveForm.get('Review')?.errors?.['required']"
+          >
+            * text should not be empty
+          </p>
+        </div>
+        <button
+          class="submit"
+          type="submit"
+          (click)="onSubmit()"
+          [disabled]="!reactiveForm.valid"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
